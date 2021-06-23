@@ -10,3 +10,5 @@ data:
   repositories: |
     - url: https://argoproj.github.io/argo-helm
       insecureIgnoreHostKey: true
+    - url: https://charts.jetstack.io
+      insecureIgnoreHostKey: true
