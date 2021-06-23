@@ -10,7 +10,7 @@ spec:
     namespace: default
   project: default
   source:
-    path: apps/
+    path: charts/argo-cd
     repoURL: https://github.com/C0ntra99/base_k8s.git
     targetRevision: HEAD
   syncPolicy:
