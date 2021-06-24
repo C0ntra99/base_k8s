@@ -12,7 +12,7 @@ spec:
   source:
     path: charts/cert-manager
     repoURL: https://github.com/C0ntra99/base_k8s.git
-    targetRevision: test
+    targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:
     automated:
       prune: true
