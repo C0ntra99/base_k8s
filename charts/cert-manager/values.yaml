@@ -75,7 +75,9 @@ serviceAccount:
   # When this flag is enabled, secrets will be automatically removed when the certificate resource is deleted
   # - --enable-certificate-owner-ref=true
 
-extraEnv: []
+extraEnv: 
+  - name: TEST_VAR
+    value: 'test value'
 # - name: SOME_VAR
 #   value: 'some value'
 
