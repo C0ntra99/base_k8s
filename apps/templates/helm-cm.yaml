@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+spec:
+  destination:
+    namespace: cert-manager
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    helm:
+      valueFiles:
+        - values.yaml
+    chart: charts/cert-manager
+    repoURL: https://github.com/C0ntra99/base_k8s.git
+    targetRevision: test
