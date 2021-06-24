@@ -16,3 +16,8 @@ argo-cd:
         - type: helm
           name: argo-cd
           url: https://argoproj.github.io/argo-helm
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    targetRevision: main
