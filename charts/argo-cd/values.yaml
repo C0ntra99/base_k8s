@@ -1,5 +1,3 @@
-namespaceOverride: argocd
-
 argo-cd:
   installCRDs: false
   global:
