@@ -10,9 +10,11 @@ spec:
     namespace: argocd
   project: default
   source:
-    path: charts/argo-cd
+    chart: charts/argo-cd
     repoURL: https://github.com/C0ntra99/base_k8s.git
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      valuesFile: values.yaml
   syncPolicy:
     automated:
       prune: true
