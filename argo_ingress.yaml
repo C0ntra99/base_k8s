@@ -14,7 +14,7 @@ spec:
     - argocd.questc.biz
     secretName: questc-wildcard-sec
   rules:
-  - host: argocd.gps.aspect-cloud.net
+  - host: argocd.questc.biz
     http:
       paths:
       - backend:
