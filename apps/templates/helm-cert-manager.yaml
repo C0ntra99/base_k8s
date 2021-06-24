@@ -10,11 +10,13 @@ spec:
     namespace: cert-manager
   project: default
   source:
-    chart: charts/cert-manager
     repoURL: https://github.com/C0ntra99/base_k8s.git
-    targetRevision: 1.0.0
+    path: charts/cert-manager
+    targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
-      valuesFile: values.yaml
+      valueFiles:
+      - values.yaml 
+       
   syncPolicy:
     automated:
       prune: true
