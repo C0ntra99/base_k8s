@@ -3,6 +3,9 @@ argo-cd:
   global:
     image:
       tag: v1.8.1
+  configs:
+    secret:
+      argocdServerAdminPassword: "$2y$10$Fww5AfC6UZv5l9oYNFyx6Ocku8u3z.ne9sB0V0jiY0ev.Ow8bnie2"
   dex:
     enabled: false
   server:
