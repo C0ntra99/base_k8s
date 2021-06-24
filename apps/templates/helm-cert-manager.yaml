@@ -2,18 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  namespace: argocd
 spec:
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: cert-manager
+    server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: charts/cert-manager
-    repoURL: https://github.com/C0ntra99/base_k8s.git
-    targetRevision: HEAD
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    helm:
+      valueFiles:
+        - charts/cert-manager/values.yaml
+    path: charts/cert-manager/
+    repoURL: ssh://github.com/C0ntra99/base_k8s.git
+    targetRevision: {{ .Values.spec.source.targetRevision }}
