@@ -1,6 +1,7 @@
 apiVersion: v2
 name: argo-cd
 version: 1.0.0
+namespace: argocd
 dependencies:
   - name: argo-cd
     version: 2.11.0
