@@ -5,14 +5,18 @@ metadata:
   namespace: argocd
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    cert-manager.io/issuer: "letsencrypt-staging"
 spec:
+  tls:
+  - hosts:
+    - argocd.questc.biz
+    secretName: questc-wildcard-sec
   rules:
-  - host: argocd.questc.biz
+  - host: argocd.gps.aspect-cloud.net
     http:
       paths:
       - backend:
-          serviceName: argo-cd-argocd-server
+          serviceName: argocd-server
           servicePort: https

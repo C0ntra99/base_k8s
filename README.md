@@ -13,7 +13,7 @@ helm dep build charts/
 
 Install Argo
 ```
-helm install argo-cd chargs/argo-cd/ --set namespaceOverride=argocd
+helm install argo-cd chargs/argo-cd/
 ```
 
 Apply ingress controller
@@ -24,8 +24,29 @@ kubectl apply -f argo_ingress.yaml
 echo {ingress loadbalncer IP} argocd.questz.biz >> /etc/hosts
 ```
 
-Bootstrap argo to manage argo
+login to argo cli and add argoproj repo 
+get admin password
+```
+add argo repo to argo
+```
+
+Bootstrap argo apps
+```
+helm template apps/ | kubectl apply -f -
+```
+
+## SSL stuff
+isntall CRDs
+```
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.4.0/cert-manager.yaml
+```
+Create issuer
+```
+kubectl --namespace cert-manager apply -f letsencrypt-issuer.yaml
+```
+
 ### How applications get installed
 Applications are bootstrapped using ArgoCD's application CRDs and then managed via a helm chart. 
 
 Application CRD definitions are stored in `apps/templates/` which define and application to deploy with argo. 
+
