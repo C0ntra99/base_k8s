@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: base_k8s
+  name: base-k8s
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
