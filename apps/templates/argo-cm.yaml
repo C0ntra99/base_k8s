@@ -12,3 +12,5 @@ data:
       insecureIgnoreHostKey: true
     - url: https://charts.jetstack.io
       insecureIgnoreHostKey: true
+    - url: https://github.com/C0ntra99/base_k8s.git
+      insecureIgnoreHostKey: true
