@@ -1,8 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd
-  namespace: default
+  name: root
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -11,16 +10,9 @@ spec:
     namespace: default
   project: default
   source:
-<<<<<<< HEAD
-    repoURL: https://github.com/C0ntra99/base_k8s.git
-    targetRevision: main
-    path: charts/argo-cd
-
-=======
-    path: charts/argo-cd
+    path: apps/
     repoURL: https://github.com/C0ntra99/base_k8s.git
     targetRevision: {{ .Values.spec.source.targetRevision }}
->>>>>>> dev
   syncPolicy:
     automated:
       prune: true
