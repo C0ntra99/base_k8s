@@ -2,15 +2,18 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
+    namespace: cert-manager
   project: default
   source:
-    helm:
-      valueFiles:
-        - charts/cert-manager/values.yaml
-    path: charts/cert-manager/
-    repoURL: ssh://github.com/C0ntra99/base_k8s.git
+    path: charts/cert-manager
+    repoURL: https://github.com/C0ntra99/base_k8s.git
     targetRevision: {{ .Values.spec.source.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
