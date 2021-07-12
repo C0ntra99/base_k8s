@@ -50,3 +50,17 @@ Applications are bootstrapped using ArgoCD's application CRDs and then managed v
 
 Application CRD definitions are stored in `apps/templates/` which define and application to deploy with argo. 
 
+# Kops Setup
+
+Pre requisists
+- Setup route53 
+- setup kops user
+- configure terminal context for kops user
+    - export KOPS_STATE_STORE
+    - export AWS_ACCESS_KEY
+    - export AWS_SECRET_KEY 
+  
+Create the cluster
+```
+kops create -f cluster/*/k8s.*.securesea.io
+```
