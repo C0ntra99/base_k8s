@@ -32,8 +32,7 @@ add argo repo to argo
 
 Bootstrap argo apps
 ```
-helm template apps/ | kubectl apply -f -
-```
+ad```
 
 ## SSL stuff
 isntall CRDs
@@ -56,11 +55,21 @@ Pre requisists
 - Setup route53 
 - setup kops user
 - configure terminal context for kops user
-    - export KOPS_STATE_STORE
+    - export KOPS_STATE_STORE=s3://cmh-ss-state-stor
     - export AWS_ACCESS_KEY
     - export AWS_SECRET_KEY 
   
 Create the cluster
 ```
 kops create -f cluster/*/k8s.*.securesea.io
+```
+
+Define ssh public key (ideally create this on deployment)
+```
+kops create secret --name k8s.cmh.securesea.io sshpublickey admin -i ~/.ssh/id_rsa.pub
+```
+
+Deploy cluster 
+```
+kops update cluster --name k8s.cmh.securesea.io --yes 
 ```
