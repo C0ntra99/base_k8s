@@ -2,14 +2,18 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
-  namespace: cert-manager
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: fowlerethan99@gmail.com
-    privateKeySecretRef:
-      name: letsencrypt-prod
-    solvers:
-    - http01:
-       ingress:
-         class: nginx
+    ...
+    solvers: 
+    # example: cross-account zone management for example.com
+    # this solver uses ambient credentials (i.e. inferred from the environment or EC2 Metadata Service)
+    # to assume a role in a different account
+    - selector:
+        dnsZones:
+          - "cmh.securesea.io"
+      dns01:
+        route53:
+          region: us-east-2
+          hostedZoneID: Z023712829CRJYGHSR2I # optional, see bpolicy above
+          role: arn:aws:iam::011512970419:role/k8s-cert-manager-role

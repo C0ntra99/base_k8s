@@ -119,7 +119,8 @@ volumeMounts: []
 # deploymentAnnotations: {}
 
 # Optional additional annotations to add to the controller Pods
-# podAnnotations: {}
+podAnnotations:
+  iam.amazonaws.com/role: "k8s-cert-manager-role"
 
 podLabels: {}
 
