@@ -57,6 +57,31 @@ spec:
       type: Public
     masters: public
     nodes: private
+  additionalPolcies:
+    node: |
+      [
+        {
+          "Action": [
+            "sts:AssumeRole"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+            "arn:aws:iam::011512970419:role/k8s-*"
+          ]
+        }
+      ]
+    master: |
+      [
+        {
+          "Action": [
+            "sts:AssumeRole"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+            "arn:aws:iam::011512970419:role/k8s-*"
+          ]
+        }
+      ]
 
 ---
 

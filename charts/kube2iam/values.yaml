@@ -1,0 +1,11 @@
+extraArgs:
+  base-role-arn: arn:aws:iam::011512970419:role/
+  default-role: kube2iam-role
+
+host:
+  iptables: true
+  interface: weave
+
+rbac:
+  create: true
+  serviceAccountName: kube2iam

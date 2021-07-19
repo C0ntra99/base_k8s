@@ -1,0 +1,8 @@
+apiVersion: v2
+name: kube2iam
+version: 1.0.0
+namespace: kube-system
+dependencies:
+  - name: kube2iam
+    version: 1.4.0
+    repository: https://charts.jetstack.io

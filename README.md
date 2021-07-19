@@ -86,6 +86,7 @@ Core k8s components:
 ingress-nginx | X | Backend ingress controller
 cert-manager | | Dynamically generate ssl certificates
 externaldns | | Dynamically modify route53 based on ingress controller
+argo-cd | X | Manage application state
 
 ### Setting up kube2iam:
 Workers need a role with the following policy:
@@ -146,6 +147,40 @@ to attach a policy to a pod the following annotation should be used:
 iam.amazonaws.com/role: k8s-{{ role name }}
 ```
 
+### Externaldns
+Role required for pods
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets"
+      ],
+      "Resource": [
+        "arn:aws:route53:::hostedzone/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+```
+
+Installing:
+```
+ helm install external-dns -f charts/external-dns/values.yaml bitnami/external-dns 
+ ```
+ This is how it should be done for core components, grabbing the official chart and using hosted values vaues
 
 ### Cert Manager
 install cruds:
@@ -171,3 +206,5 @@ Status:
 - Use pulumi to verify aws dependencies are dpeloyed
 - Setup cert-mangaer
 - setup external-dns
+
+kops deploys

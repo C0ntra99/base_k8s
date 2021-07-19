@@ -1,0 +1,10 @@
+ansible
+    created iam roles for external-dns, ingress-nginx, cert-manager
+    use helm to deploy core stack
+        nginx-ingress
+        external-dns
+        cert-manager
+        argo
+Argo takes over
+    Takes over control of the core stack
+    Deploy application infrastructure

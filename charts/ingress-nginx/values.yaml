@@ -1,0 +1,16 @@
+controller:
+  service:
+    loadBalancerSourceRanges:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+  replicaCount: 2
+  config:
+    use-proxy-protocol: "true"
+    ssl-redirect: "true"
+    keep-alive: "120"
+  extraArgs:
+    enable-ssl-passthrough: ""
+podAnnotations:
+  iam.amazonaws.com/role: k8s-nginx-ingress

@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  vars:
+    iam_roles:
+      - k8s-cert-manager
+      #- k8s-external-dns
+      #- k8s-ingress-nginx
+  tasks:
+    - name: Create iam roles
+      community.aws.iam_role:
+        name: "{{ item }}-role"
+        assume_role_policy_document: "{{ lookup('file', '../clusters/cmh/iam_roles/'+ item +'.json') }}"
+        state: present
+      with_items: "{{iam_roles}}"
+
+    - name: Create iam policies
+      community.aws.iam_policy:
+        policy_name: "{{ item }}-policy"
+        iam_type: role
+        iam_name: "{{ item }}-role"
+        policy_json: "{{ lookup('file', '../clusters/cmh/iam_policies/'+ item +'.json') }}"
+        #state: present
+      with_items: "{{ iam_roles }}"

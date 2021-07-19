@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Create kube2iam service account
+      command: 
+        kubectl apply -f ../apps/templates/k2iam-sa.yaml
+        
+    - name: Install kube2iam
+      command: 
+        helm install kube2iam -f ../charts/kube2iam/values.yaml stable/kube2iam --namespace kube-system
+    
+    - name: Install ingress-nginx
+      command:
+        helm install ingress-nginx -f ../charts/ingress-nginx/values.yaml ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
