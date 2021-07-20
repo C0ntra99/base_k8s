@@ -1,4 +1,5 @@
 stages:
+  - setup
   - dryrun
   - update
   - roll
