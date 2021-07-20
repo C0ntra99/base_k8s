@@ -6,6 +6,8 @@ stages:
 variables:
   KOPS_CLUSTER_NAME: k8s.cmh.securesea.io
 
+image: alpine:edge
+
 dryrun:
   stage: dryrun
   only:
