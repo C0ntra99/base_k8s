@@ -86,6 +86,7 @@ Core k8s components:
 ingress-nginx | X | Backend ingress controller
 cert-manager | | Dynamically generate ssl certificates
 externaldns | | Dynamically modify route53 based on ingress controller
+kube2iam | | Allows pods to access aws resources
 
 ### Setting up kube2iam:
 Workers need a role with the following policy:
