@@ -1,0 +1,24 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+        "Sid": "",
+        "Effect": "Allow",
+        "Principal": {
+            "Service": "ec2.amazonaws.com"
+        },
+        "Action": "sts:AssumeRole"
+        },
+        {
+        "Sid": "",
+        "Effect": "Allow",
+        "Principal": {
+            "AWS": [
+                "arn:aws:iam::011512970419:role/masters.k8s.cmh.securesea.io",
+                "arn:aws:iam::011512970419:role/nodes.k8s.cmh.securesea.io"
+            ]
+        },
+        "Action": "sts:AssumeRole"
+        }
+    ]
+}
