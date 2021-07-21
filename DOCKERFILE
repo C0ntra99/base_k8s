@@ -1,6 +1,18 @@
 FROM alpine:latest
 
-RUN curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
-RUN chmod +x kops
-RUN sudo mv kops /usr/local/bin/kops
+ENV KOPS_VERSION=v1.21.0
+# https://kubernetes.io/docs/tasks/kubectl/install/
+# latest stable kubectl: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
+ENV KUBECTL_VERSION=v1.21
 
+RUN apk --no-cache add ca-certificates 
+RUN apk --no-cache add --virtual build-dependencies curl 
+RUN curl -O --location --silent --show-error https://github.com/kubernetes/kops/releases/download/${KOPS_VERSION}/kops-linux-amd64 
+RUN mv kops-linux-amd64 /usr/local/bin/kops 
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$KUBECTL_VERSION/bin/linux/amd64/kubectl 
+RUN mv kubectl /usr/local/bin/kubectl 
+RUN chmod +x /usr/local/bin/kops /usr/local/bin/kubectl 
+RUN apk del --purge build-dependencies
+
+ENTRYPOINT ["/usr/local/bin/kops"]
+CMD ["--help"]
