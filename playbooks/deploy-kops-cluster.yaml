@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  environment:
+    AWS_PROFILE: efowler-cli
+  tasks:
+    - name: Check cluster status
+      shell: "kops get cluster --state s3://cmh-ss-state-store -o json | jq -r '.[].metadata.name'"
+      register: activeClusterListRaw
+
+    - name: Get defined clusters from repo
+      find:
+        paths: "{{playbook_dir}}/../clusters"
+        patterns: "k8s.*.yaml"
+        recurse: yes
+        file_type: file
+      register: definedClusters
+
+    - set_fact:
+        activeClusterList: "{{ activeClusterListRaw.stdout_lines }}"
+
+    - debug:
+        msg: "{{activeClusterList}}"
+      
+    - name: Verify all clusters are deployed
+      command: "echo {{ item }}" 
+      loop: "{{ definedClusters.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+      #when:
+      #  - item not in activeClusterList
+      #when: item.path.split('/')[-1] not in activeClusterList.stdout_lines
+3m,r

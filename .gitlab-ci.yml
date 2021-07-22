@@ -7,7 +7,11 @@ stages:
 variables:
   KOPS_CLUSTER_NAME: k8s.cmh.securesea.io
 
-image: securesea/kops
+image: gitlab.securesea.io/devs/base_k8s/kops
+
+# check cluster status
+# if not deployed then deploy
+# public key should be generated on runtime
 
 dryrun:
   stage: dryrun
